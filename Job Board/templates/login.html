@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobBoard - Login</title>
+
+    <!-- Include static CSS file -->
+  
+
+    <style>
+        /* Inline CSS (Can be moved to an external CSS file) */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e6fff5;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            color: #19d68f;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-form input {
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            border: 2px solid #19d68f;
+            transition: border-color 0.3s ease;
+        }
+
+        .login-form input:focus {
+            border-color: #17c782;
+            outline: none;
+        }
+
+        .login-form button {
+            padding: 15px;
+            background-color: #19d68f;
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .login-form button:hover {
+            background-color: #17c782;
+            transform: scale(1.05);
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .forgot-password a {
+            text-decoration: none;
+            color: #19d68f;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #17c782;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .register-link a {
+            text-decoration: none;
+            color: #19d68f;
+            font-size: 1em;
+            transition: color 0.3s ease;
+        }
+
+        .register-link a:hover {
+            color: #17c782;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form class="login-form" action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            
+            <div class="forgot-password">
+                <a href="{% url 'password_reset' %}">Forgot password?</a>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="register-link">
+            <p>Don't have an account? <a href="{% url 'register' %}">Sign up here</a></p>
+        </div>
+    </div>
+</body>
+</html>

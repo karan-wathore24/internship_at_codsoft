@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobBoard - Find your Dream Job</title>
+    
+    <!-- Include static files -->
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+    
+    <style>
+        /* Inline CSS (you can move this to a CSS file later)
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6fff5;
+        }
+        /* Header Section */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #6c8aed;
+            color: white;
+        }
+        header .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        header nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-size: 1em;
+        }
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 20px;
+            background-color: #e6fff5;
+        }
+        .hero-text {
+            max-width: 50%;
+        }
+        .hero-text h1 {
+            font-size: 2.5em;
+            color: #162dc6;
+            margin-bottom: 20px;
+        }
+        .hero-text p {
+            font-size: 1.2em;
+            color: #444;
+        }
+        .hero-search {
+            background-color: white;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .hero-search input, .hero-search button {
+            padding: 10px;
+            font-size: 1em;
+        }
+        .hero-search button {
+            background-color: #1968d6;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #7b7e7d;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            margin-top: 20px;
+        } */
+        /* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #375ee8;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+header:hover {
+    background-color: #0f5cf6;
+}
+
+header .logo {
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+}
+
+header nav a {
+    margin: 0 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: #ffe600;
+    text-decoration: underline;
+}
+
+header div a {
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 1.1em;
+    border: 2px solid white;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+header div a:hover {
+    background-color: #ffe600;
+    color: #1958d6;
+    transform: scale(1.05);
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 30px;
+    background-color: #d3d6f3;
+   
+    transition: background-color 0.3s ease;
+}
+.hero .hero-image {
+    width: 40%;
+    height: 100vh;
+    
+    
+}
+.hero .hero-image img{
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+}
+
+
+.hero:hover {
+    background-color: #d9ffeb;
+}
+
+.hero-text h1 {
+    font-size: 3em;
+    color: #0b2ffb;
+    margin-bottom: 20px;
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.hero-text p {
+    font-size: 1.3em;
+    color: #444;
+}
+
+.hero-search {
+    background-color: white;
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero-search input {
+    padding: 15px;
+    font-size: 1.1em;
+    width: 300px;
+    border: 2px solid #0509f4;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.hero-search input:focus {
+    border-color: #ff00fb;
+}
+
+.hero-search button {
+    padding: 15px;
+    font-size: 1.1em;
+    background-color: #19d68f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-search button:hover {
+    background-color: #0921f2;
+    transform: scale(1.05);
+}
+
+/* Featured Employers */
+.featured-employers {
+    padding: 50px 30px;
+    background-color: white;
+    text-align: center;
+}
+
+.featured-employers h2 {
+    font-size: 2.2em;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+.employer-list {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    margin-left: 350px;
+    
+}
+
+.employer {
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.employer:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.employer img {
+    width: 100px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.employer img:hover {
+    transform: scale(1.1);
+}
+
+.employer p {
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+/* contac form */
+.contact-container {
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #004d40;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: space-evenly;
+            margin-bottom: 20px;
+        }
+
+        .contact-info div {
+            width: 30%;
+            text-align: center;
+        }
+
+        .contact-info i {
+            font-size: 24px;
+            color: #2536ec;
+        }
+
+        .contact-info p {
+            margin: 1px 0;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .contact-info .email, .contact-info .address, .contact-info .phone {
+            color: #00bfa5;
+            font-weight: bold;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        input[type="text"], input[type="email"] {
+            width: calc(50% - 10px);
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            background-color: #00bfa5;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #009688;
+        }
+
+
+/* Footer */
+footer {
+    background-color: #676c6a;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.1em;
+    margin-top: 30px;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+footer:hover {
+    background-color: #6b7471;
+}
+
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Apana Job</div>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="#">Employer</a>
+            <a href="#">Candidate</a>
+            <a href="#">Contact</a>
+        </nav>
+        <div>
+            <!-- Use Django URL for login and sign up buttons -->
+            <a href="{% url 'login' %}" style="background-color: white; color: #19d68f; padding: 10px; text-decoration: none;">Login</a>
+            <a href="{% url 'register' %}" style="background-color: white; color: #19d68f; padding: 10px; text-decoration: none;">Sign Up</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Searching for a job?</h1>
+            <p>Find the job that fits your life</p>
+            <div class="hero-search">
+                <input type="text" placeholder="Skills, Designation, Companies" id="job-search">
+                <input type="text" placeholder="Location" id="location-search">
+                <button onclick="searchJobs()">Find Job</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Featured Employers Section (Optional) -->
+    <section class="featured-employers">
+        <h2>Featured Employers</h2>
+        <div class="employer-list">
+            <div class="employer">
+                <img src="{% static 'images/Company 1.jpg' %}" alt="Company 1"> <!-- Static images -->
+                <p>Google</p>
+            </div>
+            <div class="employer">
+                <img src="{% static 'images/Company 2.png' %}" alt="Company 2">
+                <p>Asian Inc</p>
+            </div>
+            <div class="employer">
+                <img src="{% static 'images/Company 3.png' %}" alt="Company 3">
+                <p>Atlantic Inc</p>
+            </div>
+            <div class="employer">
+                <img src="{% static 'images/Company 4.png' %}" alt="Company 3">
+                <p>TCS</p>
+            </div>
+            <div class="employer">
+                <img src="{% static 'images/Company 5.png' %}" alt="Company 3">
+                <p>Infocis</p>
+            </div>
+            <div class="employer">
+                <img src="{% static 'images/Company 6.png' %}" alt="Company 3">
+                <p>Amezon</p>
+            </div>
+        </div>
+    </section>
+
+   <!-- contact form -->
+   <div class="contact-container">
+    <h1>Contact</h1>
+    <p style="text-align: center;">Contact for any type of medical help and for ordering the medicines</p>
+
+    <div class="contact-info">
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p class="address">Near Gandhi putla, Jawahar Road, Hingoli, 431703</p>
+        </div>
+        <div>
+            <i class="fa fa-phone"></i>
+            <p class="phone">+91 9545094501</p>
+        </div>
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p class="email">karanwathore2000@gmail.com</p>
+        </div>
+    </div>
+
+    <form action="#" method="POST">
+        <div class="flex-row">
+            <input type="text" name="name" placeholder="Your Name">
+            <input type="email" name="email" placeholder="Your Email">
+        </div>
+        <input type="text" name="subject" placeholder="Subject">
+        <textarea name="message" placeholder="Message"></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Apana Job. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
